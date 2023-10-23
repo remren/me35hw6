@@ -1,4 +1,4 @@
-# ME35: Project 1 (hw6)
+# ME35: Robotics - Project 1 (hw6)
 Group Members: Douglas, Maria, and Remy
 ## Purpose
 Create an arm which can deliver "body parts" into a particular game _(which may or may not be called Opera-)_.
