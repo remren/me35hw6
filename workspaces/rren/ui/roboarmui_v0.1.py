@@ -6,6 +6,7 @@ import hunter
 
 import serial
 
+
 class UiMainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         """

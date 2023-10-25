@@ -367,34 +367,34 @@ class Yell:  #peripheral
 def heard(data):
     print(str(bytes(data)))
 
-def action(mode = 'P'): 
-    if mode == 'P':
-        try:
-            p = Yell('Fred')
-            if p.connect_up():
-                time.sleep(2)
-
-                p.send("test from p")
-                if p.is_any():
-                    print(p.read())
-                time.sleep(1)
-        except Exception as e:
-            print(e)
-        finally:
-            print('closing up yell')
-            p.disconnect()
-    else:    
-        try:   
-            L = Listen('Fred')
-            if L.connect_up():
-                time.sleep(4)
-                print(L.read())
-                L.write('test from l')
-                time.sleep(20)
-                print(L.is_any())
-                print(L.read())
-        except Exception as e:
-            print(e)
-        finally:
-            print('closing up listen')
-            L.disconnect()
+# def action(mode = 'P'): 
+#     if mode == 'P':
+#         try:
+#             p = Yell('Fred')
+#             if p.():
+#                 time.sleep(2)
+# 
+#                 p.send("test from p")
+#                 if p.is_any():
+#                     print(p.read())
+#                 time.sleep(1)
+#         except Exception as e:
+#             print(e)
+#         finally:
+#             print('closing up yell')
+#             p.disconnect()
+#     else:    
+#         try:   
+#             L = Listen('Fred')
+#             if L.connect_up():
+#                 time.sleep(4)
+#                 print(L.read())
+#                 L.write('test from l')
+#                 time.sleep(20)
+#                 print(L.is_any())
+#                 print(L.read())
+#         except Exception as e:
+#             print(e)
+#         finally:
+#             print('closing up listen')
+#             L.disconnect()

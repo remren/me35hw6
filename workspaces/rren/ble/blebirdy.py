@@ -66,6 +66,7 @@ class BLEBirdy: # "Bidirectional" to "Bidir" to "Birdy" lmao i hate myself
             await asyncio.sleep_ms(10)
             
     async def send(self):
+        while True:
             if self.operation is True:
                 await asyncio.sleep_ms(800)
                 self.op.send("OI MATE")
