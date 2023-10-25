@@ -22,4 +22,4 @@
 - [To-Do] Create a basic "shell" to build on, add buttons, graphs.
 - [To-Do] Link BLE communication to the UI
 - [To-Do] Add MatPlotLib to create dashboard
-- [To-Do] 
+- [To-Do] fuck
