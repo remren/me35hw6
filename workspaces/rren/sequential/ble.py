@@ -264,6 +264,11 @@ class Listen:   # central
         if not self.is_connected:
             return
         return self._ble.gattc_write(self._conn_handle, self._rx_handle, v, 1 if response else 0)
+# # I tried copying the send function from class Yell, but it looks like Listen is missing a few
+# # things that Yell has.
+#     def write(self, data):
+#         for conn_handle in self._connections:
+#                 self._ble.gatts_notify(conn_handle, self._handle_tx, data)
 
     def buffer(self, value):
         self.string += str(bytes(value))

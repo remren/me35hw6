@@ -48,8 +48,8 @@ class BLEWrapper:
 
     # Reads in any received Bluetooth communication after established connection.
     def ble_read(self):
+        time.sleep_ms(25)
         if self.bluetooth_success and self.bluetooth.is_any():
-            time.sleep_ms(25)
             self.bluetooth_data = self.bluetooth.read()
             return self.bluetooth_data[2:-1] # Parsing leading b' and closing '
         
@@ -58,10 +58,10 @@ class BLEWrapper:
     def ble_idle_disconnect(self, data):
         if data is None and self.bluetooth_success is True:
             self.idle_attempts += 1
-            print(f"idle attempts:{self.idle_attempts}") # DEBUG
+#             print(f"idle attempts:{self.idle_attempts}") # DEBUG
         else:
             self.idle_attempts = 0
-            print("Reset idle attempts!") # DEBUG
+#             print("Reset idle attempts!") # DEBUG
 
         if self.idle_attempts > self.max_idle_attempts:
             self.idle_attempts = 0
@@ -75,7 +75,7 @@ class BLEWrapper:
                 self.bluetooth.send(msg)
                 time.sleep_ms(25)
             if self.mode is False:         # False => Listen
-                time.sleep_ms(100)	# For some reason, this sleep is ABSOLUTELY VITAL.
+                time.sleep_ms(700)	# For some reason, this sleep is ABSOLUTELY VITAL.
                                     # If a NoneType error occurs, it is likey from this
                                     # being too short of a sleep. 600ms seems okay?
                 self.bluetooth.write(msg)

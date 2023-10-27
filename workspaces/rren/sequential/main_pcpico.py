@@ -62,7 +62,7 @@ def main():
             buffer = str(frompc_stdin())
             if len(buffer):
                 datafrompc = buffer.strip()
-                print(f"datafrompc:{datafrompc.strip()}, loop:{loop}") # DEBUG
+#                 print(f"datafrompc:{datafrompc.strip()}, loop:{loop}") # DEBUG
 
             # 2. Based on data from stdin, connect or disconnect over Bluetooth.
             #		2a. As this is PC <-> Pico, this is the blocking step.
@@ -70,13 +70,13 @@ def main():
             bluetooth_success = bluetooth.ble_status()
             if (datafrompc == "join") and bluetooth_success is False:
                 led_action_from_pc.on()
-                print("now joining") # DEBUG
+#                 print("now joining") # DEBUG
                 bluetooth_success = bluetooth.ble_connect()
-                print("After Step 2") # DEBUG
+#                 print("After Step 2") # DEBUG
                 led_action_from_pc.off()
             elif (datafrompc == "quit") and bluetooth_success is True:
                 led_action_from_pc.on()
-                print("now disconnecting") # DEBUG
+#                 print("now disconnecting") # DEBUG
                 bluetooth.ble_disconnect()
                 led_action_from_pc.off()
                 
@@ -94,7 +94,7 @@ def main():
                     button_string = button_string + str(0)
                 button_string = button_string + ','
             controller_data = f"{controller.read_joystick(14)},{controller.read_joystick(15)},{button_string[:-1]}"
-#             print(controller_data)
+            print(controller_data)
             
             # 4. Send processed controller data over Bluetooth to the "solo" Pico.
             bluetooth.ble_send(controller_data)
@@ -104,7 +104,7 @@ def main():
             
             # 6. Send data from "solo" Pico to PC via print() statement.
             if received_data is not None:
-                print(received_data)
+                print(f"$$${received_data}") # $$$ Will be parsed in the UI.
             
             time.sleep(0.3)
             loop += 1

@@ -61,50 +61,14 @@ class SerialHelper:
             self.worker.picodata.connect(self.report_picodata)
                         ^ THIS IS THE SIGNAL WHICH IS PASSED INTO THE FUNCTION AS PARAMETER
 
-        NONE OF THIS IS GOOD CODE AHAHAHAHAHAHHGHAHAH
-
         :param n:
         :return: none
         """
-        index = 0
+        sensor_index = 0
+        direction_index = 0
         for textBrowser in self.textBrowserList:
-            # found = textBrowser.find("$$$")
-            # print(f"test:{found}")
-            if data.find("$$$") > -1 and index != len(self.textBrowserList) - 1:
-                parsedata = data[3:]
-                parsedata = parsedata.split(",")
-                print(f"test:{parsedata}")
-                for item in parsedata:
-                    if item.find("L") > -1 and index == 0: # Appends to FWD_0
-                        textBrowser.clear()
-                        opposite = not(not(int(item[2:]))) # :))))))) HAHAHAHAHAHAHA
-                        textBrowser.setText(str(opposite))
-                    if item.find("L") > -1 and index == 1: # Appends to REV_0
-                        textBrowser.clear()
-                        opposite = not(int(item[2:]))
-                        textBrowser.setText(str(opposite))
-
-                    if item.find("R") > -1 and index == 2: # Appends to FWD_2
-                        textBrowser.clear()
-                        opposite = not(not(int(item[2:]))) # :))))))) HAHAHAHAHAHAHA
-                        textBrowser.setText(str(opposite))
-                    if item.find("R") > -1 and index == 3: # Appends to REV_2
-                        textBrowser.clear()
-                        opposite = not(int(item[2:]))
-                        textBrowser.setText(str(opposite))
-
-                    if item.find("A") > -1 and index == 4: # Appends to Arm_0
-                        textBrowser.clear()
-                        textBrowser.setText(item[2:])
-                    if item.find("B") > -1 and index == 5: # Appends to Arm_1
-                        textBrowser.clear()
-                        textBrowser.setText(item[2:])
-                    if item.find("S") > -1 and index == 6: # Appends to Servo
-                        textBrowser.clear()
-                        textBrowser.setText(item[2:])
-            elif index == len(self.textBrowserList) - 1:
-                textBrowser.append(f"{data}")
-            index += 1
+            textBrowser.clear()
+            textBrowser.insertPlainText(f"baller:{data}")
 
     def start_worker(self):
         """
@@ -155,7 +119,9 @@ class Worker(QObject):
     """
     alive = True
     finished = pyqtSignal()
-    picodata = pyqtSignal(str)
+    # sensors_signal = pyqtSignal(list)
+    picodata = pyqtSignal(int)
+    i = 0
 
     def setup_serial(self):
         print("setup_serial")
@@ -174,10 +140,11 @@ class Worker(QObject):
     def receive_sensor_data(self):
         while self.alive is True:
             try:
-                incoming_data = self.pico.readline()
-                incoming_data = str(incoming_data)[2:-5]
-                print(f"from pico:{incoming_data}")
-                self.picodata.emit(incoming_data)
+                # incoming_data = self.pico.readline()
+                # print(f"from pico:{incoming_data}")
+                print(f"i:{self.i}")
+                self.picodata.emit(self.i)
+                self.i += 1
                 sleep(0.1)
             except RuntimeError as e:
                 print(str(e))

@@ -61,14 +61,14 @@ class Joypad:
         reply = self.i2c.readfrom(GamePad,2)
         return struct.unpack('>H',reply)[0]
     
-# test = Joypad(1, 27, 26)
-# test.digital_setup()
-# while True:
-# # digital_read(): 1000 0000 0011 0011 1
-# # Index:		  0
-# # Info:			  St          XA   YB Sl
-#     buttons = [not test.digital_read() & btn for btn in BTN_CONST]
-# #     print(buttons)
-# #     print(f"X:{buttons[0]}, Y:{buttons[1]}, A:{buttons[2]}, B:{buttons[3]}")
-#     print(f"X:{test.read_joystick(14)}, Y:{test.read_joystick(15)} - X:{buttons[0]}, Y:{buttons[1]}, A:{buttons[2]}, B:{buttons[3]}")
-#     time.sleep(0.1)
+test = Joypad(1, 27, 26)
+test.digital_setup()
+while True:
+# digital_read(): 1000 0000 0011 0011 1
+# Index:		  0
+# Info:			  St          XA   YB Sl
+    buttons = [not test.digital_read() & btn for btn in BTN_CONST]
+#     print(buttons)
+#     print(f"X:{buttons[0]}, Y:{buttons[1]}, A:{buttons[2]}, B:{buttons[3]}, Select:{buttons[4]}, Start:{buttons[5]}")
+    print(f"X:{test.read_joystick(14)}, Y:{test.read_joystick(15)} - X:{buttons[0]}, Y:{buttons[1]}, A:{buttons[2]}, B:{buttons[3]}, Select:{buttons[4]}, Start:{buttons[5]}")
+    time.sleep(0.1)
