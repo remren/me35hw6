@@ -105,18 +105,18 @@ def main():
             #		 But only send states a few at a time. RT Update not super important to dashboard.
             #		 Other fix is to see what send does vs write, and if write could just be send.
 #         motorservo_states = '1,0,1,0,360,360,360,360'
-#         motorandclaw_states = f"L:{loop % 3},R:{loop % 3},S:{loop % 3 + 360}" # Left Drive State, Right Drive State Servo for Arm
-#         armservo_states = f"A:{loop % 3 + 360},B:{loop % 3 + 360}" # Arm Servo A (Base), Arm Servo B (Second)
-        motorandclaw_states = f"L:{left_motor_status},R:{right_motor_status}"
+        motorandclaw_states = f"L:{loop % 3},R:{loop % 3},S:{loop % 3 + 360}" # Left Drive State, Right Drive State Servo for Arm
+        armservo_states = f"A:{loop % 3 + 360},B:{loop % 3 + 360}" # Arm Servo A (Base), Arm Servo B (Second)
+#         motorandclaw_states = f"L:{left_motor_status},R:{right_motor_status}"
         
         # 4. Send data to the "antenna" Pico over Bluetooth, reporting
         #	 the current state of the motors/servos.
         if loop: # on Odd loop iterations
             bluetooth.ble_send(str(motorandclaw_states))
             print(str(motorandclaw_states))
-#         else:        # on Even loop iterations
-#             bluetooth.ble_send(str(armservo_states))
-#             print(str(armservo_states))
+        else:        # on Even loop iterations
+            bluetooth.ble_send(str(armservo_states))
+            print(str(armservo_states))
                     
 #         time.sleep(0.5)
         loop += 1

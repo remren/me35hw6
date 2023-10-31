@@ -94,7 +94,7 @@ def main():
                     button_string = button_string + str(0)
                 button_string = button_string + ','
             controller_data = f"{controller.read_joystick(14)},{controller.read_joystick(15)},{button_string[:-1]}"
-            print(controller_data)
+            print(f"Left,Right,X,Y,A,B,Start,Select: {controller_data}")
             
             # 4. Send processed controller data over Bluetooth to the "solo" Pico.
             bluetooth.ble_send(controller_data)
@@ -115,3 +115,5 @@ def main():
     
 main()
     
+
+
